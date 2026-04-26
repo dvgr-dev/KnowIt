@@ -8,8 +8,7 @@
 ## Complete File Tree
 
 ```
-knowit/
-├── package.json              ← root (concurrently — run both with one command)
+knowit/              
 ├── start.sh                  ← one-shot setup + launch script
 ├── .gitignore
 ├── README.md
