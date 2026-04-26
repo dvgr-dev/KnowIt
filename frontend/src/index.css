@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────── */
+/*  BASE                                                       */
+/* ─────────────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body, #root {
+    @apply bg-base text-tx-1 min-h-screen;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar       { width: 3px; height: 3px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-bd-str rounded-full; }
+
+  ::selection { @apply bg-sky/20 text-sky; }
+
+  /* Remove default button/input resets */
+  button { cursor: pointer; }
+  input, select, textarea { outline: none; }
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/*  COMPONENTS                                                 */
+/* ─────────────────────────────────────────────────────────── */
+@layer components {
+
+  /* ── Cards ─────────────────────────────────────────────── */
+  .card {
+    @apply bg-card border border-bd-sub rounded-xl p-5
+           transition-all duration-200
+           hover:border-bd-def;
+  }
+  .card-interactive {
+    @apply card cursor-pointer
+           hover:-translate-y-0.5 hover:shadow-card hover:border-bd-str
+           active:translate-y-0 active:scale-[0.99];
+  }
+
+  /* ── Buttons ────────────────────────────────────────────── */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           bg-sky text-black font-display font-semibold
+           rounded-xl px-6 py-3 text-sm tracking-wide
+           shadow-sky-glow
+           transition-all duration-150
+           hover:opacity-90 hover:shadow-sky-lg hover:-translate-y-px
+           active:scale-[0.98] active:translate-y-0
+           disabled:opacity-35 disabled:cursor-not-allowed
+           disabled:translate-y-0 disabled:shadow-none;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2
+           border border-bd-def text-tx-2 rounded-lg px-4 py-2 text-sm
+           bg-transparent font-sans
+           transition-all duration-150
+           hover:bg-raised hover:text-tx-1 hover:border-bd-str;
+  }
+  .btn-icon {
+    @apply w-8 h-8 rounded-lg border border-bd-def bg-raised
+           text-tx-2 flex items-center justify-center
+           transition-all duration-150
+           hover:bg-hover hover:text-sky hover:border-sky/40;
+  }
+
+  /* ── Inputs ─────────────────────────────────────────────── */
+  .input {
+    @apply w-full bg-raised border border-bd-def rounded-xl
+           px-4 py-3 text-sm text-tx-1 font-sans
+           placeholder-tx-3
+           transition-all duration-150
+           focus:border-sky focus:ring-2 focus:ring-sky/10;
+  }
+  .label {
+    @apply text-[10px] font-display font-bold text-tx-3
+           uppercase tracking-widest mb-1.5 block;
+  }
+
+  /* ── Nav item ────────────────────────────────────────────── */
+  .nav-item {
+    @apply relative flex items-center gap-2.5 px-3 py-2.5
+           rounded-lg text-[13.5px] text-tx-2 font-sans
+           transition-all duration-150 cursor-pointer
+           border border-transparent w-full text-left
+           hover:text-tx-1 hover:bg-raised;
+  }
+  .nav-item.active {
+    @apply text-sky bg-sky/10 font-medium;
+  }
+  .nav-item.active::before {
+    content: '';
+    @apply absolute -left-2 top-1/2 -translate-y-1/2
+           w-[3px] h-5 bg-sky rounded-r;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+  }
+
+  /* ── Badges / pills ──────────────────────────────────────── */
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5
+           rounded-full text-[10.5px] font-semibold tracking-wide;
+  }
+
+  /* ── Progress ────────────────────────────────────────────── */
+  .prog-track {
+    @apply h-1 bg-bd-def rounded-full overflow-hidden;
+  }
+  .prog-fill {
+    @apply h-full rounded-full;
+    transition: width 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ── Tables ──────────────────────────────────────────────── */
+  .data-table { @apply w-full border-collapse text-sm; }
+  .data-table th {
+    @apply text-left px-4 py-2.5 text-[10px] font-display
+           font-bold text-tx-3 uppercase tracking-widest
+           border-b border-bd-sub whitespace-nowrap;
+  }
+  .data-table td {
+    @apply px-4 py-3 border-b border-bd-sub text-tx-1
+           transition-colors duration-100;
+  }
+  .data-table tr:last-child td { @apply border-b-0; }
+  .data-table tbody tr:hover td { @apply bg-raised; }
+
+  /* ── Skeleton shimmer ────────────────────────────────────── */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      theme(colors.raised)  25%,
+      #1c1c28               50%,
+      theme(colors.raised)  75%
+    );
+    background-size: 400px 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+    @apply rounded-lg;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/*  UTILITIES                                                  */
+/* ─────────────────────────────────────────────────────────── */
+@layer utilities {
+  .font-display { font-family: 'Syne', sans-serif; }
+
+  /* Noise / grid overlay (login bg) */
+  .noise-grid {
+    background-image:
+      linear-gradient(rgba(30, 30, 46, 0.55) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30, 30, 46, 0.55) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  /* Text glow helpers */
+  .glow-sky      { box-shadow: 0 0 20px rgba(56, 189, 248, 0.25); }
+  .text-glow-sky { text-shadow: 0 0 20px rgba(56, 189, 248, 0.4); }
+
+  /* Thin scrollbar */
+  .scrollbar-thin::-webkit-scrollbar       { width: 3px; height: 3px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { @apply bg-bd-str rounded-full; }
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/*  KEYFRAMES                                                  */
+/* ─────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+@keyframes shimmer {
+  from { background-position: -400px 0; }
+  to   { background-position:  400px 0; }
+}
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0);     }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1;  }
+  50%       { opacity: .4; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-fade-up  { animation: fadeUp  0.22s ease forwards; }
+.animate-slide-in { animation: slideIn 0.2s  ease;          }
+.animate-spin     { animation: spin    0.7s  linear infinite; }
+.animate-pulse    { animation: pulse-dot 2s  ease-in-out infinite; }
