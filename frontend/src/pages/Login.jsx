@@ -57,7 +57,7 @@ export default function Login() {
             <img
               src="/logo.png"
               alt="KnowIt Logo"
-              className="w-20 h-20 rounded-2xl object-cover mx-auto
+              className="w-14 h-14 rounded-2xl object-cover mx-auto
                          shadow-[0_0_28px_rgba(56,189,248,0.25)]"
             />
           </div>
